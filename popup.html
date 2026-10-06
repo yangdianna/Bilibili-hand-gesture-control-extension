@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>Bilibili 手势控制</title>
+  <style>
+    body { margin: 0; padding: 12px 14px; min-width: 240px; font-family: system-ui, -apple-system, "Microsoft YaHei", sans-serif; color: #222; }
+    h1 { font-size: 14px; margin: 0 0 8px; }
+    #status { font-size: 12px; color: #555; margin-bottom: 10px; line-height: 1.5; min-height: 32px; }
+    #toggle {
+      width: 100%; padding: 8px 10px; border: 0; border-radius: 6px;
+      background: #00aeec; color: white; font-size: 13px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    }
+    #toggle:disabled { background: #ccc; cursor: not-allowed; }
+    #toggle:not(:disabled):hover { background: #009bd6; }
+    .hint { margin-top: 10px; font-size: 11px; color: #888; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>Bilibili 手势控制</h1>
+  <div id="status">加载中…</div>
+  <button id="toggle" disabled>…</button>
+  <p class="hint">打开 B 站视频播放页，扩展会自动在视频右上角出现 ✋ 浮标，点开后用三种手势控制。</p>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+/* Bilibili Gesture Panel — injected into bilibili.com pages by the extension. */
+
+.bg-panel,
+.bg-chip {
+  position: fixed;
+  z-index: 2147483000;
+  font-family: system-ui, -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
+  color: #f0f0f0;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.bg-panel {
+  width: 226px;
+  background: rgba(20, 20, 20, 0.58);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+  transition: opacity 220ms ease;
+  opacity: 0.55;
+}
+.bg-panel.is-active { opacity: 1; }
+.bg-panel.is-collapsed { display: none; }
+
+.bg-panel__drag { height: 8px; cursor: move; background: rgba(255,255,255,0.04); }
+.bg-panel__drag:hover { background: rgba(255,255,255,0.08); }
+
+.bg-panel__title {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 10px 6px; font-weight: 600; font-size: 12px; letter-spacing: 0.3px;
+}
+
+.bg-panel__collapse {
+  background: transparent; border: 0; color: inherit; cursor: pointer;
+  font-size: 14px; padding: 0 2px; opacity: 0.8; line-height: 1;
+}
+.bg-panel__collapse:hover { opacity: 1; }
+
+.bg-panel__body { padding: 0 10px 8px; }
+
+.bg-panel__preview {
+  display: none;
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #000;
+  margin-bottom: 6px;
+  /* mirror to match MediaPipe selfieMode — feels like a mirror */
+  transform: scaleX(-1);
+}
+.bg-panel.has-stream .bg-panel__preview { display: block; }
+
+.bg-panel__row {
+  padding: 3px 0; display: flex; align-items: center; gap: 6px;
+  white-space: nowrap; overflow: hidden;
+}
+
+.bg-panel__row--cam .bg-dot { margin-left: auto; }
+.bg-panel__row--cam[data-state="running"] .bg-dot { background: #2ecc71; }
+.bg-panel__row--cam[data-state="paused"]  .bg-dot { background: #f1c40f; }
+.bg-panel__row--cam[data-state="error"]   .bg-dot { background: #e74c3c; }
+.bg-panel__row--cam[data-state="pending"] .bg-dot { background: #95a5a6; }
+.bg-panel__row--cam[data-state="running"] { color: #f0f0f0; }
+.bg-panel__row--cam[data-state="paused"]  { color: #cfd8dc; }
+.bg-panel__row--cam[data-state="error"]   { color: #ffab91; }
+
+.bg-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.2); flex-shrink: 0; transition: background 120ms;
+}
+
+.bg-panel__row--gesture { color: #cfd8dc; }
+
+.bg-panel__divider { height: 1px; background: rgba(255,255,255,0.08); margin: 5px 0; }
+
+.bg-panel__action { justify-content: flex-start; gap: 4px; }
+.bg-panel__hint   { margin-left: auto; color: rgba(255,255,255,0.55); font-size: 11px; }
+.bg-panel__action .bg-panel__dot { margin-left: 6px; }
+.bg-panel__action.is-firing .bg-panel__dot {
+  background: #00aeec; box-shadow: 0 0 8px rgba(0,174,236,0.6);
+}
+
+.bg-panel__footer { display: flex; gap: 6px; margin-top: 6px; }
+.bg-panel__btn {
+  flex: 1; background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08); color: inherit;
+  padding: 5px 8px; border-radius: 6px; cursor: pointer;
+  font-size: 12px; font-family: inherit; transition: background 120ms;
+}
+.bg-panel__btn:hover  { background: rgba(255,255,255,0.14); }
+.bg-panel__btn:active { background: rgba(255,255,255,0.2); }
+
+.bg-chip {
+  display: none; width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(20,20,20,0.62);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  opacity: 0.85; transition: opacity 200ms, transform 120ms;
+}
+.bg-chip.is-visible { display: flex; }
+.bg-chip:hover { opacity: 1; transform: scale(1.05); }

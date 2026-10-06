@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Bilibili 手势控制",
+  "version": "0.1.0",
+  "description": "通过摄像头手势控制 B 站视频（播放/暂停、静音、拖动进度），悬浮面板实时显示摄像头状态和当前手势。",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_title": "Bilibili 手势控制",
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.bilibili.com/*", "*://bilibili.com/*"],
+      "js": [
+        "content.js"
+      ],
+      "css": ["content.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": ["storage"],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/inject.js",
+        "src/util/*",
+        "src/gesture/*",
+        "src/camera/*",
+        "src/action/*",
+        "src/panel/*",
+        "src/vendor/*"
+      ],
+      "matches": ["*://www.bilibili.com/*", "*://bilibili.com/*"]
+    }
+  ]
+}
